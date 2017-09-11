@@ -71,7 +71,10 @@ export default function hook(WrappedComponent) {
     }
 
     render() {
-      return <WrappedComponent generateTestHook={this.generateTestHook} {...this.props} />;
+      return <WrappedComponent
+        generateTestHook={this.generateTestHook}
+        {...this.props}
+        ref={ref => this._wrappedComponent = ref} />;
     }
   }
 
