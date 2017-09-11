@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import TestHookStore from './TestHookStore';
 
@@ -56,6 +57,10 @@ export default function hook(WrappedComponent) {
     // React.
     generateTestHook(identifier, f = () => {}) {
       return (component) => {
+        if (!this.context.testHooks) {
+          f(component)
+          return
+        }
         if (component) {
           this.context.testHooks.add(identifier, component);
         } else {
